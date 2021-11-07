@@ -5,6 +5,7 @@ from pprint import pprint
 
 from app.item import init
 from app.item import login
+from app.item import view
 
 if __name__=="__main__":
     arguments = sys.argv[1:]
@@ -16,3 +17,5 @@ if __name__=="__main__":
     if section == "user":
          if command == "login":
              login(*params )
+         elif command == "view":
+             view() 

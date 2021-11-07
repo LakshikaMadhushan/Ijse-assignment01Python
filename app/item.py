@@ -25,3 +25,12 @@ def login(username):
     f = open(__session_file__,"w")
     f.write(username)
     f.close()
+
+def __get_logged_user():
+    f = open(__session_file__,"r") 
+    username = f.readline()
+    return username
+
+def view():
+    username = __get_logged_user()
+    print(username)
