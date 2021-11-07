@@ -74,6 +74,24 @@ class Item:
             item.selling_price = _data_["sellingPrice"]
 
 
+    def all(self):
+        # Get all fil names
+        item_file_names = os.listdir(__item_folder__)
+        items = []
+          # append to array
+        for item_file_name in item_file_names:
+            item = Item()
+            Item.__get_item_by_path(item,f"{__item_folder__}/{item_file_name}")
+                # print(item)
+            items.append(item)
+        return items
+
+def __repr__(self):
+        return f"id:{self.id},name:{self.name},price:{self.price}" 
+
+def __str__(self):
+        return f"id:{self.id},name:{self.name},price:{self.price}"
+
 
 
 def item_create(name,price, selling_price): 
@@ -81,3 +99,16 @@ def item_create(name,price, selling_price):
     item.name = name
     item.price = price
     item.selling_price = selling_price
+
+    item.save()
+
+
+def item_all():
+    item = Item()
+    items = item.all()
+    pprint(items)
+
+def item_view(id):
+    item = Item()
+    item.get(id)
+    print(item.id,item.name, item.price, item.selling_price)
