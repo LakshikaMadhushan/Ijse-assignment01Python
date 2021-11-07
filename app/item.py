@@ -19,3 +19,9 @@ def init(arguments):
         params = arguments[2:]
         if command == "db":
             db()
+
+def login(username):
+    user = username 
+    f = open(__session_file__,"w")
+    f.write(username)
+    f.close()
