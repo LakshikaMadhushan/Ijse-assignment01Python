@@ -38,3 +38,10 @@ item all
 
 ```cmd
 item view <id>
+```
+### Search
+
+```cmd
+item search <key> <value>
+ ex:- item search <price> <200>
+```
