@@ -34,3 +34,50 @@ def __get_logged_user():
 def view():
     username = __get_logged_user()
     print(username)
+
+class Item:
+    def __init__(item):
+        if os.path.exists(__item_last_id__):
+            with open(__item_last_id__, "r") as last_id_f:
+                item.last_id = int(last_id_f.readline()) 
+        else:
+            item.last_id = 0  
+
+    def save(item):
+        id = item.last_id+1 
+
+        # save db items
+        _data_ = {
+            "id" : id,
+            "name" : item.name,
+            "price" : item.price,
+            "sellingPrice" : item.selling_price
+        }
+        with open(f"{__item_folder__}/{id}.db","w") as item_file:
+            json.dump(_data_ ,item_file)
+        # print(item.last_id)
+
+        # save next Id
+        item.last_id +=1
+        with open(__item_last_id__,"w") as f:
+            f.write(str(item.last_id))
+
+    def get(self,  id):
+        Item.__get_item_by_path(self,f"{__item_folder__}/{id}.db")
+
+    def __get_item_by_path(item, path):
+         with open(path , "r") as item_file:  
+            _data_ = json.load(item_file)
+            item.id = _data_["id"]
+            item.name = _data_["name"]
+            item.price = _data_["price"]
+            item.selling_price = _data_["sellingPrice"]
+
+
+
+
+def item_create(name,price, selling_price): 
+    item = Item()
+    item.name = name
+    item.price = price
+    item.selling_price = selling_price

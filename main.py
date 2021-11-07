@@ -6,6 +6,7 @@ from pprint import pprint
 from app.item import init
 from app.item import login
 from app.item import view
+from app.item import item_create
 
 if __name__=="__main__":
     arguments = sys.argv[1:]
@@ -19,3 +20,6 @@ if __name__=="__main__":
              login(*params )
          elif command == "view":
              view() 
+    elif section == "item":
+         if command == "create":
+              item_create(*params)
