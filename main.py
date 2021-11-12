@@ -10,9 +10,12 @@ from app.item import item_create
 from app.item import item_all
 from app.item import item_view
 from app.item import item_search
+from app.customer import cus_init
+from app.customer import customer_save
 
 if __name__=="__main__":
     arguments = sys.argv[1:]
+    cus_init(arguments)
     init(arguments)
     section = arguments[0]
     command = arguments[1]
@@ -32,3 +35,6 @@ if __name__=="__main__":
               item_view(*params)
          elif command  == "search":
               item_search(*params)
+    elif section == "customer":
+         if command == "save":
+              customer_save(*params)
