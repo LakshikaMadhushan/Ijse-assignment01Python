@@ -45,9 +45,38 @@ class Customer:
         customer.last_id +=1
         with open(__customer_last_id__,"w") as f:
             f.write(str(customer.last_id))
+            
+    def get(self,  id):
+        Customer.__get_customer_by_path(self,f"{__customer_folder__}/{id}.db")
 
 
+    def __get_customer_by_path(customer, path):
+         with open(path , "r") as customer_file:  
+            _data_ = json.load(customer_file)
+            customer.id = _data_["id"]
+            customer.name = _data_["name"]
+            customer.address = _data_["address"]
+            customer.salary = _data_["salary"]
+            customer.phone = _data_["phone"]
 
+    def all(self):
+        # Get all fil names
+        customer_file_names = os.listdir(__customer_folder__)
+        customers = []
+          # append to array
+        for customer_file_name in customer_file_names:
+            customer = Customer()
+            Customer.__get_customer_by_path(customer,f"{__customer_folder__}/{customer_file_name}")
+            
+            customers.append(customer)
+        return customers
+
+
+    def __repr__(self):
+        return f"id:{self.id},name:{self.name},address:{self.address},salary:{self.salary},phone:{self.phone}" 
+
+    def __str__(self):
+        return f"id:{self.id},name:{self.name},address:{self.address},salary:{self.salary},phone:{self.phone}" 
 
 def customer_save(name,address, salary, phone): 
     customer = Customer()
@@ -57,3 +86,8 @@ def customer_save(name,address, salary, phone):
     customer.phone = phone
     
     customer.save()
+
+def customer_all():
+    customer = Customer()
+    customers = customer.all()
+    pprint(customers)
